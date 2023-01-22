@@ -16,41 +16,41 @@
             <img src="./images/avatar.jpg" alt="Аватар пользователя" class="profile__avatar">
             <div class="profile__info">
                 <h1 class="profile__name">Жак-Ив Кусто</h1>
-                <button class="profile__edit-button" type="button"></button>
+                <button class="profile__edit-button" type="button" aria-label="Редактировать"></button>
                 <p class="profile__job">Исследователь океана</p>
             </div>
-            <button class="profile__add-button" type="button"></button>
+            <button class="profile__add-button" type="button" aria-label="Добавить"></button>
         </section>
         <section class="elements">
             <ul class="grid">
                 <li class="grid__cell">
                     <img src="./images/karelia.jpg" alt="Озеро в Карелии" class="grid__image">
-                    <p class="grid__title">Карелия</p>
+                    <h2 class="grid__title">Карелия</h2>
                     <button class="grid__like-button" type="button"></button>
                 </li>
                 <li class="grid__cell">
                     <img src="./images/lagonaki.jpg" alt="Горное плато Лаго-Наки" class="grid__image">
-                    <p class="grid__title">Плато Лаго-Наки</p>
+                    <h2 class="grid__title">Плато Лаго-Наки</h2>
                     <button class="grid__like-button" type="button"></button>
                 </li>
                 <li class="grid__cell">
                     <img src="./images/elbrus.jpg" alt="Гора Эльбрус вдалеке" class="grid__image">
-                    <p class="grid__title">Гора Эльбрус</p>
+                    <h2 class="grid__title">Гора Эльбрус</h2>
                     <button class="grid__like-button" type="button"></button>
                 </li>
                 <li class="grid__cell">
                     <img src="./images/ural.jpg" alt="Уральские горы в облаках" class="grid__image">
-                    <p class="grid__title">Уральские горы</p>
+                    <h2 class="grid__title">Уральские горы</h2>
                     <button class="grid__like-button" type="button"></button>
                 </li>
                 <li class="grid__cell">
                     <img src="./images/altai.jpg" alt="Заснеженные горы Алтая" class="grid__image">
-                    <p class="grid__title">Алтайский край</p>
+                    <h2 class="grid__title">Алтайский край</h2>
                     <button class="grid__like-button" type="button"></button>
                 </li>
                 <li class="grid__cell">
                     <img src="./images/ergaki.jpg" alt="Горный хребет Ергаки" class="grid__image">
-                    <p class="grid__title">Ергаки</p>
+                    <h2 class="grid__title">Ергаки</h2>
                     <button class="grid__like-button" type="button"></button>
                 </li>
             </ul>
@@ -59,15 +59,17 @@
     <footer class="footer">
         <p class="footer__copyright">&copy; 2023 Mesto Russia</p>
     </footer>
-    <section class="popup">
-        <form class="popup__container" name="popup-form">
-            <button class="popup__close-button" type="button"></button>
+    <div class="popup">
+        <div class="popup__container">
+            <button class="popup__close-button" type="button" aria-label="Закрыть"></button>
             <h2 class="popup__title">Редактировать профиль</h2>
-            <input class="popup__name" type="text" value="Жак-Ив Кусто" placeholder="Как вас зовут?" required>
-            <input class="popup__job" type="text" value="Исследователь океана" placeholder="Чем занимаетесь?" required>
-            <button class="popup__save-button" type="submit">Сохранить</button>
-        </form>
-    </section>
-<script src="./vendor/script.js"></script>
+                <form class="popup__form" name="popup-form">
+                    <input class="popup__input popup__input_name" type="text" name="name" placeholder="Как вас зовут?" required>
+                    <input class="popup__input popup__input_job" type="text" name="job" placeholder="Чем занимаетесь?" required>
+                    <button class="popup__save-button" type="submit">Сохранить</button>
+                </form>
+        </div>
+    </div>
+<script src="./scripts/script.js"></script>
 </body>
 </html>
