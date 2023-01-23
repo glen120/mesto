@@ -3,10 +3,10 @@ let popupBtnOpen = document.querySelector(".profile__edit-button");
 let popupContainer = document.querySelector(".popup");
 let popupBtnClosed = document.querySelector(".popup__close-button");
 
-// Объявляем переменные для формы ввода попапа
+// Объявляем переменные для формы ввода данных в попапе
 let form = document.querySelector(".popup__form");
-let nameInput = form.querySelector(".popup__input_name");
-let jobInput = form.querySelector(".popup__input_job");
+let nameInput = form.querySelector(".popup__input_type_name");
+let jobInput = form.querySelector(".popup__input_type_job");
 
 // Объявляем переменные для текстовых значений профиля
 let profileName = document.querySelector(".profile__name");
