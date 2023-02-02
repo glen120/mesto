@@ -1,4 +1,4 @@
-.grid {
+.card {
     max-width: 100%;
     margin: 0;
     padding: 0;
@@ -9,13 +9,13 @@
 }
 
 @media (max-width: 900px) {
-    .grid {
+    .card {
         grid-template: repeat(3, 1fr) / repeat(2, 282px);
     }
 }
 
 @media (max-width: 600px) {
-    .grid {
+    .card {
         grid-template: repeat(6, 1fr) / repeat(1, 282px);
     }
 }

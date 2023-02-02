@@ -22,52 +22,48 @@
             <button class="profile__add-button" type="button" aria-label="Добавить"></button>
         </section>
         <section class="elements">
-            <ul class="grid">
-                <li class="grid__cell">
-                    <img src="./images/karelia.jpg" alt="Озеро в Карелии" class="grid__image">
-                    <h2 class="grid__title">Карелия</h2>
-                    <button class="grid__like-button" type="button"></button>
-                </li>
-                <li class="grid__cell">
-                    <img src="./images/lagonaki.jpg" alt="Горное плато Лаго-Наки" class="grid__image">
-                    <h2 class="grid__title">Плато Лаго-Наки</h2>
-                    <button class="grid__like-button" type="button"></button>
-                </li>
-                <li class="grid__cell">
-                    <img src="./images/elbrus.jpg" alt="Гора Эльбрус вдалеке" class="grid__image">
-                    <h2 class="grid__title">Гора Эльбрус</h2>
-                    <button class="grid__like-button" type="button"></button>
-                </li>
-                <li class="grid__cell">
-                    <img src="./images/ural.jpg" alt="Уральские горы в облаках" class="grid__image">
-                    <h2 class="grid__title">Уральские горы</h2>
-                    <button class="grid__like-button" type="button"></button>
-                </li>
-                <li class="grid__cell">
-                    <img src="./images/altai.jpg" alt="Заснеженные горы Алтая" class="grid__image">
-                    <h2 class="grid__title">Алтайский край</h2>
-                    <button class="grid__like-button" type="button"></button>
-                </li>
-                <li class="grid__cell">
-                    <img src="./images/ergaki.jpg" alt="Горный хребет Ергаки" class="grid__image">
-                    <h2 class="grid__title">Ергаки</h2>
-                    <button class="grid__like-button" type="button"></button>
-                </li>
+            <ul class="card">
             </ul>
+            <template id="card-template">
+                <li class="card__cell">
+                    <button class="card__bin-button" type="button"></button>
+                    <img src="" alt="" class="card__image">
+                    <h2 class="card__title"></h2>
+                    <button class="card__like-button" type="button"></button>
+                </li>
+            </template>
         </section>
     </main>
     <footer class="footer">
         <p class="footer__copyright">&copy; 2023 Mesto Russia</p>
     </footer>
-    <div class="popup">
+    <div class="popup popup_profile">
         <div class="popup__container">
-            <button class="popup__close-button" type="button" aria-label="Закрыть"></button>
+            <button class="popup__close-button popup__close-button_profile" type="button" aria-label="Закрыть"></button>
             <h2 class="popup__title">Редактировать профиль</h2>
-                <form class="popup__form" name="popup-form">
+                <form class="popup__form popup__form_profile" name="popup-profile">
                     <input class="popup__input popup__input_type_name" type="text" name="name" placeholder="Как вас зовут?" required>
                     <input class="popup__input popup__input_type_job" type="text" name="job" placeholder="Чем занимаетесь?" required>
                     <button class="popup__save-button" type="submit">Сохранить</button>
                 </form>
+        </div>
+    </div>
+    <div class="popup popup_card">
+        <div class="popup__container">
+            <button class="popup__close-button popup__close-button_card" type="button" aria-label="Закрыть"></button>
+            <h2 class="popup__title">Новое место</h2>
+            <form class="popup__form popup__form_card" name="popup-card">
+                <input class="popup__input popup__input_card_name" type="text" name="picture" placeholder="Название" required>
+                <input class="popup__input popup__input_card_link" type="url" name="link" placeholder="Ссылка на картинку" required>
+                <button class="popup__save-button" type="submit">Создать</button>
+            </form>
+        </div>
+    </div>
+    <div class="popup popup_image">
+        <div class="popup__image-container">
+            <button class="popup__close-button popup__close-button_image" type="button" aria-label="Закрыть"></button>
+            <img src="" alt="" class="popup__image-picture">
+            <p class="popup__image-sign"></p>
         </div>
     </div>
 <script src="./scripts/script.js"></script>
