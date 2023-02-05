@@ -1,10 +1,12 @@
 // Объявляем переменные для открытия и закрытия попапа редактирования профиля
 const popupBtnEdit = document.querySelector(".profile__edit-button");
 const popupProfBtnClosed = document.querySelector(".popup__close-button_profile");
+const popupProfile = document.querySelector(".popup_profile");
 
 //Объявляем переменные для открытия и закрытия попапа добавления карточки
 const popupBtnAdd = document.querySelector(".profile__add-button");
 const popupCardBtnClosed = document.querySelector(".popup__close-button_card");
+const popupCard = document.querySelector(".popup_card");
 
 // Объявляем переменные для формы ввода данных в попапе редактирования профиля
 const profileForm = document.querySelector(".popup__form_profile");
@@ -27,8 +29,7 @@ function closePopup(popup) {
 
 // Обработчик кнопки открытия попапа редактирования профиля
 popupBtnEdit.addEventListener("click", () => {
-    const popup = document.querySelector(".popup_profile");
-    openPopup(popup);
+    openPopup(popupProfile);
     nameInput.value = profileName.textContent;
     jobInput.value = profileJob.textContent;
 });
@@ -36,28 +37,24 @@ popupBtnEdit.addEventListener("click", () => {
 // Обработчик формы сохранения новых данных профиля
 profileForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
-    const popup = document.querySelector(".popup_profile");
     profileName.textContent = nameInput.value;
     profileJob.textContent = jobInput.value;
-    closePopup(popup);
+    closePopup(popupProfile);
 });
 
 // Обработчик кнопки закрытия попапа редактирования профиля
 popupProfBtnClosed.addEventListener("click", () => {
-    const popup = document.querySelector(".popup_profile");
-    closePopup(popup);
+    closePopup(popupProfile);
 });
 
 // Обработчик кнопки открытия попапа добавления карточки
 popupBtnAdd.addEventListener("click", () => {
-    const popup = document.querySelector(".popup_card");
-    openPopup(popup);
+    openPopup(popupCard);
 });
 
 // Обработчик кнопки закрытия попапа добавления карточки
 popupCardBtnClosed.addEventListener("click", () => {
-    const popup = document.querySelector(".popup_card");
-    closePopup(popup);
+    closePopup(popupCard);
 });
 
 //Объявляем переменные для массива карточек и формы ввода новых карточек
@@ -68,6 +65,7 @@ const cardNameInput = cardForm.querySelector(".popup__input_card_name");
 const cardLinkInput = cardForm.querySelector(".popup__input_card_link");
 
 //Объявляем переменные для попапа просмотра карточки
+const popupImage = document.querySelector(".popup_image");
 const popupImagePicture = document.querySelector(".popup__image-picture");
 const popupImageSign = document.querySelector(".popup__image-sign");
 const popupImageBtnClosed = document.querySelector(".popup__close-button_image");
@@ -78,11 +76,10 @@ renderCards();
 cardForm.addEventListener('submit',(evt) => {
     evt.preventDefault();
     const card = createCard({name: cardNameInput.value, link: cardLinkInput.value});
-    const popup = document.querySelector(".popup_card");
     cardNameInput.value = "";
     cardLinkInput.value = "";
     cardsContainer.prepend(card);
-    closePopup(popup);
+    closePopup(popupCard);
 });
 
 //Функция отображения массива карточек
@@ -109,8 +106,7 @@ function createCard(item) {
     });
     //Обработчик открытия попапа просмотра карточки
     card.querySelector(".card__image").addEventListener("click", () => {
-        const popup = document.querySelector(".popup_image");
-        openPopup(popup);
+        openPopup(popupImage);
         popupImagePicture.src = item.link;
         popupImagePicture.alt = item.name;
         popupImageSign.textContent = item.name;
@@ -120,8 +116,7 @@ function createCard(item) {
 
 //Обработчик закрытия попапа просмотра карточки
 popupImageBtnClosed.addEventListener("click", () => {
-    const popup = document.querySelector(".popup_image");
-    closePopup(popup);
+    closePopup(popupImage);
 });
 
 
