@@ -38,9 +38,6 @@ const popupImageBtnClosed = document.querySelector(".popup__close-button_image")
 function openPopup(popup) {
     popup.classList.add("popup_opened");
     document.addEventListener("keydown", closeEsc);
-    cardForm.reset();
-    deleteValidationErrors();
-    closeEsc(popup);
 }
 
 // Функция закрытия попапа
@@ -57,7 +54,7 @@ function closeEsc(evt) {
     }
 }
 
-//Обработчик закрытия попапов на клик за пределы попапа
+// Обработчик закрытия попапов на клик за пределы попапа
 popupList.forEach(function (item) {
     item.addEventListener("click", (evt) => {
         if (evt.target === evt.currentTarget) {
@@ -66,15 +63,15 @@ popupList.forEach(function (item) {
     });
 });
 
-//Функция удаления сообщений об ошибках при закрытии попапов
-function deleteValidationErrors() {
-    const popupOpened = document.querySelector(".popup_opened");
-    const textError = popupOpened.querySelectorAll(".popup__input-error");
+// Функция удаления сообщений об ошибках при закрытии попапов
+function deleteValidationErrors(popupOpened) {
+    const popupForm = popupOpened.querySelector(".popup__form");
+    const textError = popupForm.querySelectorAll(".popup__input-error");
     textError.forEach(function (textItem) {
         textItem.classList.remove("popup__input-error_active");
         textItem.textContent = "";
     });
-    const lineError = popupOpened.querySelectorAll(".popup__input");
+    const lineError = popupForm.querySelectorAll(".popup__input");
     lineError.forEach(function (lineItem) {
         lineItem.classList.remove("popup__input_invalid");
     });
@@ -85,6 +82,7 @@ popupBtnEdit.addEventListener("click", () => {
     openPopup(popupProfile);
     nameInput.value = profileName.textContent;
     jobInput.value = profileJob.textContent;
+    deleteValidationErrors(popupProfile);
 });
 
 // Обработчик формы сохранения новых данных профиля
@@ -103,6 +101,8 @@ popupProfBtnClosed.addEventListener("click", () => {
 // Обработчик кнопки открытия попапа добавления карточки
 popupBtnAdd.addEventListener("click", () => {
     openPopup(popupCard);
+    cardForm.reset();
+    deleteValidationErrors(popupCard);
 });
 
 // Обработчик кнопки закрытия попапа добавления карточки
@@ -159,7 +159,3 @@ function createCard(cardData) {
 popupImageBtnClosed.addEventListener("click", () => {
     closePopup(popupImage);
 });
-
-
-
-
