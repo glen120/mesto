@@ -1,3 +1,4 @@
+// Объект валидации
 const formsConfig = {
     formSelector: '.popup__form',
     inputSelector: '.popup__input',
@@ -7,64 +8,68 @@ const formsConfig = {
     errorClass: 'popup__input-error_active'
 }
 
-const showInputError = (formElement, inputElement, errorMessage) => {
+// Функция отображения ошибок
+const showInputError = (formElement, inputElement, errorMessage, config) => {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-    inputElement.classList.add(formsConfig.inputErrorClass);
+    inputElement.classList.add(config.inputErrorClass);
     errorElement.textContent = errorMessage;
-    errorElement.classList.add(formsConfig.errorClass);
-};
+    errorElement.classList.add(config.errorClass);
+}
 
-const hideInputError = (formElement, inputElement) => {
+// Функция скрытия ошибок
+const hideInputError = (formElement, inputElement, config) => {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-    inputElement.classList.remove(formsConfig.inputErrorClass);
-    errorElement.classList.remove(formsConfig.errorClass);
+    inputElement.classList.remove(config.inputErrorClass);
+    errorElement.classList.remove(config.errorClass);
     errorElement.textContent = "";
-};
+}
 
-const checkInputValidity = (formElement, inputElement) => {
+// Функция проверки валидации
+const checkInputValidity = (formElement, inputElement, config) => {
     if (!inputElement.validity.valid) {
-        showInputError(formElement, inputElement, inputElement.validationMessage);
+        showInputError(formElement, inputElement, inputElement.validationMessage, config);
     } else {
-        hideInputError(formElement, inputElement);
+        hideInputError(formElement, inputElement, config);
     }
-};
+}
 
+// Функция прохода по массиву инпутов
 const hasInvalidInput = (inputList) => {
     return inputList.some((inputElement) => {
         return !inputElement.validity.valid;
     });
-};
+}
 
-const toggleButtonState = (inputList, buttonElement) => {
+// Функция переключения кнопки submit
+const toggleButtonState = (inputList, buttonElement, config) => {
     if (hasInvalidInput(inputList)) {
-        buttonElement.classList.add(formsConfig.inactiveButtonClass);
+        buttonElement.classList.add(config.inactiveButtonClass);
         buttonElement.setAttribute("disabled", true);
     } else {
-        buttonElement.classList.remove(formsConfig.inactiveButtonClass);
+        buttonElement.classList.remove(config.inactiveButtonClass);
         buttonElement.removeAttribute("disabled", false);
     }
-};
+}
 
-const setEventListeners = (formElement) => {
-    const inputList = Array.from(formElement.querySelectorAll(formsConfig.inputSelector));
-    const buttonElement = formElement.querySelector(formsConfig.submitButtonSelector);
-    toggleButtonState(inputList, buttonElement);
+// Функция проверки инпута
+const setEventListeners = (formElement, config) => {
+    const inputList = Array.from(formElement.querySelectorAll(config.inputSelector));
+    const buttonElement = formElement.querySelector(config.submitButtonSelector);
+    toggleButtonState(inputList, buttonElement, config);
     inputList.forEach((inputElement) => {
         inputElement.addEventListener("input", () => {
-            checkInputValidity(formElement, inputElement);
-            toggleButtonState(inputList, buttonElement);
+            checkInputValidity(formElement, inputElement, config);
+            toggleButtonState(inputList, buttonElement, config);
         });
     });
-};
+}
 
-const enableValidation = () => {
-    const formList = Array.from(document.querySelectorAll(formsConfig.formSelector));
+// Функция запуска проверки валидации
+const enableValidation = (config) => {
+    const formList = Array.from(document.querySelectorAll(config.formSelector));
     formList.forEach((formElement) => {
-        formElement.addEventListener("submit", (evt) => {
-            evt.preventDefault();
-        });
-        setEventListeners(formElement);
+        setEventListeners(formElement, config);
     });
-};
+}
 
-enableValidation();
+enableValidation(formsConfig);
