@@ -1,4 +1,9 @@
-//Объявляем массив с карточками
+// Экспортируем переменные для попапа просмотра карточки
+export const popupImage = document.querySelector(".popup_image");
+export const popupImagePicture = document.querySelector(".popup__image-picture");
+export const popupImageSign = document.querySelector(".popup__image-sign");
+
+// Экспортируем массив с карточками
 export const initialCards = [
     {
         name: 'Архыз',

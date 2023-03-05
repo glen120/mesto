@@ -2,6 +2,7 @@
 export const formsConfig = {
     formSelector: '.popup__form',
     inputSelector: '.popup__input',
+    errorTextSelector: '.popup__input-error',
     submitButtonSelector: '.popup__save-button',
     inactiveButtonClass: 'popup__save-button_disabled',
     inputErrorClass: 'popup__input_invalid',
@@ -16,7 +17,9 @@ export class FormValidator {
         this._inactiveButtonClass = formsConfig.inactiveButtonClass;
         this._inputErrorClass = formsConfig.inputErrorClass;
         this._errorClass = formsConfig.errorClass;
+        this._errorTextSelector = formsConfig.errorTextSelector;
         this._inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
+        this._textErrors = this._formElement.querySelectorAll(this._errorTextSelector);
         this._buttonElement = this._formElement.querySelector(this._submitButtonSelector);
     }
 
@@ -55,12 +58,22 @@ export class FormValidator {
     // Метод переключения кнопки submit
     _toggleButtonState() {
         if (this._hasInvalidInput()) {
-            this._buttonElement.classList.add(this._inactiveButtonClass);
-            this._buttonElement.setAttribute("disabled", true);
+            this.disableButtonState();
         } else {
-            this._buttonElement.classList.remove(this._inactiveButtonClass);
-            this._buttonElement.removeAttribute("disabled", false);
+            this._enableButtonState();
         }
+    }
+
+    // Метод выключения кнопки submit
+    disableButtonState() {
+        this._buttonElement.classList.add(this._inactiveButtonClass);
+        this._buttonElement.setAttribute("disabled", true);
+    }
+
+    // Метод включения кнопки submit
+    _enableButtonState() {
+        this._buttonElement.classList.remove(this._inactiveButtonClass);
+        this._buttonElement.removeAttribute("disabled", false);
     }
 
     // Метод проверки инпутов
@@ -71,6 +84,17 @@ export class FormValidator {
                 this._checkInputValidity(inputElement);
                 this._toggleButtonState();
             });
+        });
+    }
+
+    // Метод удаления сообщений об ошибках при закрытии попапов
+    removeValidationErrors() {
+        this._textErrors.forEach((textItem) => {
+            textItem.classList.remove(this._errorClass);
+            textItem.textContent = "";
+        });
+        this._inputList.forEach((lineItem) => {
+            lineItem.classList.remove(this._inputErrorClass);
         });
     }
 

@@ -1,4 +1,8 @@
-import {popupImage, popupImagePicture, popupImageSign, openPopup} from "./script.js";
+// Импортируем переменные для попапа просмотра карточки
+import {popupImage, popupImagePicture, popupImageSign} from "./utils/constants.js";
+
+// Импортируем функцию открытия попапа
+import {openPopup} from "./utils/utils.js";
 
 export default class Card {
     constructor(cardData, templateSelector) {
@@ -21,8 +25,9 @@ export default class Card {
         this._element = this._getTemplate();
         this._setEventListeners();
 
-        this._element.querySelector(".card__image").src = this._link;
-        this._element.querySelector(".card__image").alt = this._name;
+        this._cardImage = this._element.querySelector(".card__image");
+        this._cardImage.src = this._link;
+        this._cardImage.alt = this._name;
         this._element.querySelector(".card__title").textContent = this._name;
 
         return this._element;
