@@ -23,15 +23,15 @@
         </section>
         <section class="elements">
             <ul class="card">
+                <template id="card-template">
+                    <li class="card__cell">
+                        <button class="card__bin-button" type="button" aria-label="Удалить"></button>
+                        <img src="#" alt="" class="card__image">
+                        <h2 class="card__title"></h2>
+                        <button class="card__like-button" type="button" aria-label="Нравится"></button>
+                    </li>
+                </template>
             </ul>
-            <template id="card-template">
-                <li class="card__cell">
-                    <button class="card__bin-button" type="button" aria-label="Удалить"></button>
-                    <img src="#" alt="" class="card__image">
-                    <h2 class="card__title"></h2>
-                    <button class="card__like-button" type="button" aria-label="Нравится"></button>
-                </li>
-            </template>
         </section>
     </main>
     <footer class="footer">
@@ -78,6 +78,6 @@
             <p class="popup__image-sign"></p>
         </div>
     </div>
-    <script type="module" src="./scripts/script.js"></script>
+    <script type="module" src="pages/index.js"></script>
 </body>
 </html>
