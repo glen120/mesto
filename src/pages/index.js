@@ -24,6 +24,9 @@ import PopupWithImage from "../components/PopupWithImage.js";
 // Импортируем класс с валидацией инпутов и объект валидации
 import {FormValidator, formsConfig} from "../components/FormValidator.js";
 
+// Импортируем css-файлов для сборки
+import "./index.css";
+
 // Объявляем попап редактирования профиля
 const userInfo = new UserInfo({profileName, profileJob});
 

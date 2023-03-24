@@ -25,4 +25,4 @@ ___
     * минификация и транспиляция JS-кода с помощью Babel
     * обработка и минификация CSS-стилей с помощью PostCSS
 ___
-[Ссылка на страницу в GitHub Pages](https://glen120.github.io/mesto/)
+[Ссылка на страницу в GitHub Pages](https://glen120.github.io/mesto/src)
