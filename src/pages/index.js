@@ -1,5 +1,5 @@
 // Импортируем все переменные и массив с карточками
-import {initialCards,
+import {initialCards, formsConfig,
         popupProfile, popupCard, popupImage,
         popupBtnEdit, popupBtnAdd,
         nameInput, jobInput,
@@ -22,7 +22,7 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 
 // Импортируем класс с валидацией инпутов и объект валидации
-import {FormValidator, formsConfig} from "../components/FormValidator.js";
+import FormValidator from "../components/FormValidator.js";
 
 // Импортируем css-файлов для сборки
 import "./index.css";
@@ -40,7 +40,7 @@ popupEditProfile.setEventListeners();
 
 // Объявляем попап добавления карточки
 const popupAddCard = new PopupWithForm(popupCard, {callbackSubmitForm: () => {
-    renderInitialCards.addItem(addCard({name: cardNameInput.value, link: cardLinkInput.value}));
+    renderCards.addItem(addCard({name: cardNameInput.value, link: cardLinkInput.value}));
     popupAddCard.closePopup();
     }
 });
@@ -57,8 +57,8 @@ const profileValidation = new FormValidator(formsConfig, popupProfile);
 const cardValidation = new FormValidator(formsConfig, popupCard);
 
 // Объявляем переменную для отображения массива карточек
-const renderInitialCards = new Section({items: initialCards, renderer: (cardData) => {
-        renderInitialCards.addItem(addCard(cardData));
+const renderCards = new Section({renderItems: (cardData) => {
+        renderCards.addItem(addCard(cardData));
     }}, ".card");
 
 // Функция добавления новой карточки
@@ -73,7 +73,7 @@ popupOpenImage.openPopup(link, name);
 }
 
 // Активируем отображение массива карточек
-renderInitialCards.renderItems();
+renderCards.renderItems(initialCards);
 
 // Активируем валидацию попапов
 profileValidation.enableValidation();
@@ -90,6 +90,5 @@ popupBtnEdit.addEventListener("click", () => {
 // Обработчик кнопки открытия попапа добавления карточки
 popupBtnAdd.addEventListener("click", () => {
     popupAddCard.openPopup();
-    cardValidation.disableButtonState();
     cardValidation.removeValidationErrors();
 });

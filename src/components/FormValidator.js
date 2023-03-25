@@ -1,15 +1,4 @@
-// Объект валидации
-export const formsConfig = {
-    formSelector: '.popup__form',
-    inputSelector: '.popup__input',
-    errorTextSelector: '.popup__input-error',
-    submitButtonSelector: '.popup__save-button',
-    inactiveButtonClass: 'popup__save-button_disabled',
-    inputErrorClass: 'popup__input_invalid',
-    errorClass: 'popup__input-error_active'
-}
-
-export class FormValidator {
+export default class FormValidator {
     constructor(formsConfig, formElement) {
         this._formElement = formElement;
         this._inputSelector = formsConfig.inputSelector;
@@ -17,9 +6,7 @@ export class FormValidator {
         this._inactiveButtonClass = formsConfig.inactiveButtonClass;
         this._inputErrorClass = formsConfig.inputErrorClass;
         this._errorClass = formsConfig.errorClass;
-        this._errorTextSelector = formsConfig.errorTextSelector;
         this._inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
-        this._textErrors = this._formElement.querySelectorAll(this._errorTextSelector);
         this._buttonElement = this._formElement.querySelector(this._submitButtonSelector);
     }
 
@@ -58,14 +45,14 @@ export class FormValidator {
     // Метод переключения кнопки submit
     _toggleButtonState() {
         if (this._hasInvalidInput()) {
-            this.disableButtonState();
+            this._disableButtonState();
         } else {
             this._enableButtonState();
         }
     }
 
     // Метод выключения кнопки submit
-    disableButtonState() {
+    _disableButtonState() {
         this._buttonElement.classList.add(this._inactiveButtonClass);
         this._buttonElement.setAttribute("disabled", true);
     }
@@ -87,15 +74,10 @@ export class FormValidator {
         });
     }
 
-    // Метод удаления сообщений об ошибках при закрытии попапов
+    // Метод, удаляющий сообщения об ошибках и отключающий кнопку submit при открытии попапов
     removeValidationErrors() {
-        this._textErrors.forEach((textItem) => {
-            textItem.classList.remove(this._errorClass);
-            textItem.textContent = "";
-        });
-        this._inputList.forEach((lineItem) => {
-            lineItem.classList.remove(this._inputErrorClass);
-        });
+        this._inputList.forEach(lineItem => this._hideInputError(lineItem));
+        this._disableButtonState();
     }
 
     // Метод запуска проверки валидации

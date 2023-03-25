@@ -21,6 +21,16 @@ const cardForm = document.querySelector(".popup__form_card");
 export const cardNameInput = cardForm.querySelector(".popup__input_card_name");
 export const cardLinkInput = cardForm.querySelector(".popup__input_card_link");
 
+// Экспорт объекта с настройками валидации
+export const formsConfig = {
+    formSelector: '.popup__form',
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__save-button',
+    inactiveButtonClass: 'popup__save-button_disabled',
+    inputErrorClass: 'popup__input_invalid',
+    errorClass: 'popup__input-error_active'
+}
+
 // Экспортируем массив с карточками
 export const initialCards = [
     {

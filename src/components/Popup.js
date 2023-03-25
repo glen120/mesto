@@ -1,17 +1,17 @@
 export default class Popup {
-    constructor(popupSelector) {
-        this._popupSelector = popupSelector;
+    constructor(popup) {
+        this._popup = popup;
     }
 
     // Метод, открывающий попап
     openPopup() {
-        this._popupSelector.classList.add("popup_opened");
+        this._popup.classList.add("popup_opened");
         document.addEventListener("keydown", this._closeEsc);
     }
 
     // Метод, закрывающий попап
     closePopup() {
-        this._popupSelector.classList.remove("popup_opened");
+        this._popup.classList.remove("popup_opened");
         document.removeEventListener("keydown", this._closeEsc);
     }
 
@@ -24,7 +24,7 @@ export default class Popup {
 
     // Метод, закрывающий попап на крестик или по клику в пустой области
     setEventListeners() {
-        this._popupSelector.addEventListener("click", (evt) => {
+        this._popup.addEventListener("click", (evt) => {
             if (evt.target.classList.contains("popup_opened") || evt.target.classList.contains("popup__close-button")) {
                 this.closePopup();
             }
