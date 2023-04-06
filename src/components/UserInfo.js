@@ -1,20 +1,31 @@
 export default class UserInfo {
-    constructor({profileName, profileJob}) {
+    constructor({profileName, profileJob, profileAvatar}) {
         this._profileName = profileName;
         this._profileJob = profileJob;
+        this._profileAvatar = profileAvatar;
+    }
+
+    // Метод сохраняет id пользователя
+    save({_id}) {
+        this.id = _id;
     }
 
     // Метод возвращает объект с данными пользователя
     getUserInfo() {
         return {
             name: this._profileName.textContent,
-            job: this._profileJob.textContent
+            about: this._profileJob.textContent,
         };
     }
 
-    // Метод добавляет на страницу новые данные пользователя
-    setUserInfo({name, job}) {
-        this._profileName.textContent = name;
-        this._profileJob.textContent = job;
+    // Метод добавляет на страницу данные пользователя
+    setUserInfo(info) {
+        this._profileName.textContent = info.name;
+        this._profileJob.textContent = info.about;
+    }
+
+    // Метод добавляет на страницу новый аватар пользователя
+    setUserAvatar(data) {
+        this._profileAvatar.src = data.avatar;
     }
 }

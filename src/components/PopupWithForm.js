@@ -7,6 +7,8 @@ export default class PopupWithForm extends Popup {
         this._callbackSubmitForm = callbackSubmitForm;
         this._popupForm = this._popup.querySelector(".popup__form");
         this._popupInputList = this._popupForm.querySelectorAll(".popup__input");
+        this._saveButton = this._popupForm.querySelector(".popup__save-button");
+        this._buttonText = this._saveButton.textContent;
     }
 
     // Приватный метод, собирающий данные всех полей формы
@@ -31,5 +33,18 @@ export default class PopupWithForm extends Popup {
     closePopup() {
         super.closePopup();
         this._popupForm.reset();
+    }
+
+    // Метод, сообщающий о начале процесса загрузки
+    startSpinner() {
+        this._loadingButtonText = "Сохранение...";
+        this._saveButton.disabled = true;
+        this._saveButton.textContent = this._loadingButtonText;
+    }
+
+    // Метод, возвращающий надпись на кнопке сохранения в исходное состояние
+    endSpinner() {
+        this._saveButton.disabled = false;
+        this._saveButton.textContent = this._buttonText;
     }
 }
