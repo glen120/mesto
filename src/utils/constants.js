@@ -20,11 +20,6 @@ export const profileName = document.querySelector(".profile__name");
 export const profileJob = document.querySelector(".profile__job");
 export const profileAvatar =document.querySelector(".profile__avatar-image");
 
-// Экспортируем переменные для формы ввода в попапе добавления новых карточек
-const cardForm = document.querySelector(".popup__form_card");
-export const cardNameInput = cardForm.querySelector(".popup__input_card_name");
-export const cardLinkInput = cardForm.querySelector(".popup__input_card_link");
-
 // Экспорт объекта с настройками валидации
 export const formsConfig = {
     formSelector: '.popup__form',

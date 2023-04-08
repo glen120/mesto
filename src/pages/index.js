@@ -3,8 +3,7 @@ import {cards, formsConfig,
         popupProfile, popupCard, popupImage, popupAvatar, popupConfirm,
         popupBtnEdit, popupBtnAdd, popupBtnAvatar,
         nameInput, jobInput,
-        profileName, profileJob, profileAvatar,
-        cardNameInput, cardLinkInput} from "../utils/constants.js";
+        profileName, profileJob, profileAvatar} from "../utils/constants.js";
 
 // Импортируем класс с запросами к серверу
 import Api from "../components/Api.js";
