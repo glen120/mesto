@@ -27,7 +27,7 @@ export default class Card {
     // Метод создания карточки
     createCard() {
         this._setEventListeners();
-        this._likeToggle();
+        this._switchLike();
 
         this._cardImage.src = this._link;
         this._cardImage.alt = this._name;
@@ -61,7 +61,7 @@ export default class Card {
     }
 
     // Метод переключения состояния лайка
-    _likeToggle() {
+    _switchLike() {
         if (this._checkUserLike()) {
             this.setLike();
         } else {

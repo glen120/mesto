@@ -5,11 +5,6 @@ export default class UserInfo {
         this._profileAvatar = profileAvatar;
     }
 
-    // Метод сохраняет id пользователя
-    save({_id}) {
-        this.id = _id;
-    }
-
     // Метод возвращает объект с данными пользователя
     getUserInfo() {
         return {
@@ -18,14 +13,11 @@ export default class UserInfo {
         };
     }
 
-    // Метод добавляет на страницу данные пользователя
-    setUserInfo(info) {
-        this._profileName.textContent = info.name;
-        this._profileJob.textContent = info.about;
-    }
-
-    // Метод добавляет на страницу новый аватар пользователя
-    setUserAvatar(data) {
-        this._profileAvatar.src = data.avatar;
+    //Метод получает от сервера все данные пользователя
+    setUserInfo({name, about, avatar, _id}) {
+        this._profileName.textContent = name;
+        this._profileJob.textContent = about;
+        this._profileAvatar.src = avatar;
+        this.id = _id;
     }
 }

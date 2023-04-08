@@ -5,7 +5,7 @@ export default class Api {
     }
 
     // Проверяем результат запроса
-    _resultRequest(res) {
+    _checkResponse(res) {
         if (res.ok) {
             return res.json();
         } else {
@@ -19,7 +19,7 @@ export default class Api {
             method: "GET",
             headers: this._headers
         })
-            .then((res) => this._resultRequest(res));
+            .then((res) => this._checkResponse(res));
     }
 
     // Запрашиваем начальные карточки
@@ -28,7 +28,7 @@ export default class Api {
             method: "GET",
             headers: this._headers
         })
-            .then((res) => this._resultRequest(res));
+            .then((res) => this._checkResponse(res));
     }
 
     // Меняем аватар пользователя
@@ -38,7 +38,7 @@ export default class Api {
             headers: this._headers,
             body:JSON.stringify(body)
         })
-            .then((res) => this._resultRequest(res));
+            .then((res) => this._checkResponse(res));
     }
 
     // Редактируем данные пользователя
@@ -48,17 +48,20 @@ export default class Api {
             headers: this._headers,
             body: JSON.stringify(body)
         })
-            .then((res) => this._resultRequest(res));
+            .then((res) => this._checkResponse(res));
     }
 
     // Добавляем новую карточку
-    addNewCard(body) {
+    addNewCard({picture, link}) {
         return fetch(`${this._url}/cards`, {
             method: "POST",
             headers: this._headers,
-            body: JSON.stringify(body)
+            body: JSON.stringify({
+                name: picture,
+                link
+            })
         })
-            .then((res) => this._resultRequest(res));
+            .then((res) => this._checkResponse(res));
     }
 
     // Удаляем карточку
@@ -67,7 +70,7 @@ export default class Api {
             method: "DELETE",
             headers: this._headers
         })
-            .then((res) => this._resultRequest(res));
+            .then((res) => this._checkResponse(res));
     }
 
     // Ставим лайк карточке
@@ -76,7 +79,7 @@ export default class Api {
             method: "PUT",
             headers: this._headers
         })
-            .then((res) => this._resultRequest(res));
+            .then((res) => this._checkResponse(res));
     }
 
     // Удаляем лайк карточке
@@ -85,6 +88,6 @@ export default class Api {
             method: "DELETE",
             headers: this._headers
         })
-            .then((res) => this._resultRequest(res));
+            .then((res) => this._checkResponse(res));
     }
 }

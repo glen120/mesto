@@ -35,15 +35,15 @@ export default class PopupWithForm extends Popup {
         this._popupForm.reset();
     }
 
-    // Метод, сообщающий о начале процесса загрузки
-    startSpinner() {
+    // Метод, сообщающий о начале процесса сохранения
+    addSpinner() {
         this._loadingButtonText = "Сохранение...";
         this._saveButton.disabled = true;
         this._saveButton.textContent = this._loadingButtonText;
     }
 
     // Метод, возвращающий надпись на кнопке сохранения в исходное состояние
-    endSpinner() {
+    removeSpinner() {
         this._saveButton.disabled = false;
         this._saveButton.textContent = this._buttonText;
     }

@@ -17,7 +17,7 @@ export default class PopupWithConfirm extends Popup {
     }
 
     // Метод, задающий целевую карточку для передачи её колбэку
-    targetCard(target) {
+    setTargetCard(target) {
         this._target = target;
     }
 }

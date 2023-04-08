@@ -46,7 +46,7 @@ const api = new Api({
 const userInfo = new UserInfo({profileName, profileJob, profileAvatar});
 
 const popupEditProfile = new PopupWithForm(popupProfile, {callbackSubmitForm: (userData) => {
-    popupEditProfile.startSpinner();
+    popupEditProfile.addSpinner();
     api.editProfile(userData)
         .then((res) => {
             userInfo.setUserInfo(res);
@@ -54,38 +54,37 @@ const popupEditProfile = new PopupWithForm(popupProfile, {callbackSubmitForm: (u
         })
         .catch((err) => console.log(err))
         .finally(() => {
-            popupEditProfile.endSpinner();
+            popupEditProfile.removeSpinner();
         });
     }
 });
 
 // Объявляем попап смены аватара
 const popupChangeAvatar = new PopupWithForm(popupAvatar, {callbackSubmitForm: (avatarData) => {
-    popupChangeAvatar.startSpinner();
+    popupChangeAvatar.addSpinner();
     api.editAvatar(avatarData)
         .then((res) => {
-            userInfo.setUserAvatar(res);
+            userInfo.setUserInfo(res);
             popupChangeAvatar.closePopup();
         })
         .catch((err) => console.log(err))
         .finally(() => {
-            popupChangeAvatar.endSpinner();
+            popupChangeAvatar.removeSpinner();
         });
     }
 });
 
 // Объявляем попап добавления карточки
-const popupAddCard = new PopupWithForm(popupCard, {callbackSubmitForm: () => {
-    const inputItem = {name: cardNameInput.value, link: cardLinkInput.value};
-    popupAddCard.startSpinner();
-    api.addNewCard(inputItem)
+const popupAddCard = new PopupWithForm(popupCard, {callbackSubmitForm: (cardData) => {
+    popupAddCard.addSpinner();
+    api.addNewCard(cardData)
         .then((res) => {
-            renderCards.addItem(addCard(res), true);
+            renderCards.addItem(addCard(res));
             popupAddCard.closePopup();
         })
         .catch((err) => console.log(err))
         .finally(() => {
-            popupAddCard.endSpinner();
+            popupAddCard.removeSpinner();
         });
     }
 });
@@ -135,24 +134,25 @@ function handleCardClick(link, name) {
 
 // Функция, открывающая попап с подтверждением удаления карточки
 function handleCardRemove(cardId) {
-    popupWithConfirm.targetCard(cardId);
+    popupWithConfirm.setTargetCard(cardId);
     popupWithConfirm.openPopup();
 }
 
 // Функция, отвечающая за постановку и снятие лайков
 function handleCardLike (cardId) {
-    if (cards[cardId].isLiked) {
+    const card = cards[cardId];
+    if (card.isLiked) {
         api.removeLike(cardId)
             .then(likes => {
-                cards[cardId].unsetLike();
-                cards[cardId].updateLikesCounter(likes);
+                card.unsetLike();
+                card.updateLikesCounter(likes);
             })
             .catch((err) => console.log(err));
     } else {
         api.addLike(cardId)
             .then(likes => {
-                cards[cardId].setLike();
-                cards[cardId].updateLikesCounter(likes);
+                card.setLike();
+                card.updateLikesCounter(likes);
             })
             .catch((err) => console.log(err));
     }
@@ -161,9 +161,7 @@ function handleCardLike (cardId) {
 // Получение от сервера первичных данных
 Promise.all([api.getUserInfo(), api.getInitialCards()])
     .then(([userData, initialCards]) => {
-        userInfo.save(userData);
         userInfo.setUserInfo(userData);
-        userInfo.setUserAvatar(userData);
         renderCards.renderItems(initialCards.reverse());
     })
     .catch((err) => console.log(err));
@@ -182,8 +180,9 @@ popupBtnAvatar.addEventListener("click", () => {
 // Обработчик кнопки открытия попапа редактирования профиля
 popupBtnEdit.addEventListener("click", () => {
     popupEditProfile.openPopup();
-    nameInput.value = userInfo.getUserInfo().name;
-    jobInput.value = userInfo.getUserInfo().about;
+    const {name, about} = userInfo.getUserInfo();
+    nameInput.value = name;
+    jobInput.value = about;
     profileValidation.removeValidationErrors();
 });
 
